@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.8
-Release:        8.14%{?dist}
+Release:        8.15%{?dist}
 Summary:        Maven Invoker Plugin
 
 License:        ASL 2.0
@@ -18,15 +18,15 @@ BuildArch: noarch
 BuildRequires: %{?scl_prefix_java_common}javapackages-tools
 # Maven and its dependencies
 BuildRequires: %{?scl_prefix_java_common}maven-local
-BuildRequires: maven30-maven-resources-plugin
-BuildRequires: maven30-maven-plugin-plugin
-BuildRequires: maven30-maven-script-interpreter
-BuildRequires: maven30-maven-invoker
-BuildRequires: maven30-mvn(org.apache.maven.doxia:doxia-sink-api)
-BuildRequires: maven30-mvn(org.apache.maven.doxia:doxia-site-renderer)
+BuildRequires: %{?scl_prefix}maven-resources-plugin
+BuildRequires: %{?scl_prefix}maven-plugin-plugin
+BuildRequires: %{?scl_prefix}maven-script-interpreter
+BuildRequires: %{?scl_prefix}maven-invoker
+BuildRequires: %{?scl_prefix}mvn(org.apache.maven.doxia:doxia-sink-api)
+BuildRequires: %{?scl_prefix}mvn(org.apache.maven.doxia:doxia-site-renderer)
 
 # Others
-BuildRequires: maven30-groovy
+BuildRequires: %{?scl_prefix}groovy
 
 
 %description
@@ -43,7 +43,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch0
 
@@ -51,13 +51,13 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -71,6 +71,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.8-8.15
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.8-8.14
 - maven33 rebuild
 
