@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.8
-Release:        8.15%{?dist}
+Release:        8.16%{?dist}
 Summary:        Maven Invoker Plugin
 
 License:        ASL 2.0
@@ -17,7 +17,7 @@ BuildArch: noarch
 # Basic stuff
 BuildRequires: %{?scl_prefix_java_common}javapackages-tools
 # Maven and its dependencies
-BuildRequires: %{?scl_prefix_java_common}maven-local
+BuildRequires: %{?scl_prefix}maven-local
 BuildRequires: %{?scl_prefix}maven-resources-plugin
 BuildRequires: %{?scl_prefix}maven-plugin-plugin
 BuildRequires: %{?scl_prefix}maven-script-interpreter
@@ -71,6 +71,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.8-8.16
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.8-8.15
 - maven33 rebuild #2
 
